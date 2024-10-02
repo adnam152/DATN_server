@@ -15,12 +15,12 @@ return new class extends Migration
         Schema::create('sliders', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('description')->default('');
+            $table->string('description')->default('')->nullable();
             $table->enum('page', array_values(Slider::PAGE));
             $table->string('width');
             $table->string('height');
             $table->enum('object_fit', array_values(Slider::OBJECT_FIT));
-            $table->integer('delay')->unsigned();
+            $table->unsignedInteger('delay');
             $table->boolean('is_active')->default(false);
             $table->foreignId('created_by')->constrained('admin_accounts');
             $table->foreignId('updated_by')->constrained('admin_accounts');

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('customer_email');
             $table->string('customer_phone_number');
             $table->string('customer_address');
-            $table->string('note');
+            $table->string('note')->nullable();
             $table->foreignId('payment_id')->constrained('payments');
             $table->string('status');
             $table->boolean('is_paid')->default(false);

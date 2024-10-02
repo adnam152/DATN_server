@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->integer('related_id')->comment('Thuộc sản phẩm hoặc slider');
             $table->enum('related_type', array_values(Media::RELATED_TYPE));
-            $table->string('path');
+            $table->string('url');
             $table->enum('type', array_values(Media::TYPE));
             $table->timestamps();
         });
