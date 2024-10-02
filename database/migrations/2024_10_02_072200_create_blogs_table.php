@@ -11,18 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('blogs', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('sku')->unique();
+            $table->string('title');
+            $table->string('slug')->unique();
             $table->string('thumbnail');
-            $table->text('description');
-            $table->string('short_description');
-            $table->foreignId('catalogue_id')->constrained('catalogues');
-            $table->foreignId('brand_id')->constrained('brands');
-            $table->integer('sale_count');
-            $table->integer('view_count');
-            $table->integer('wish_count');
+            $table->text('content');
+            $table->integer('view_count')->default(0);
             $table->foreignId('created_by')->constrained('admin_accounts');
             $table->foreignId('updated_by')->constrained('admin_accounts');
             $table->timestamps();
@@ -34,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('blogs');
     }
 };
