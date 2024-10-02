@@ -15,7 +15,6 @@ return new class extends Migration
             $table->foreignId('variant_id')->constrained('variants');
             $table->foreignId('attribute_value_id')->constrained('attribute_values');
             $table->primary(['attribute_value_id', 'variant_id']);            
-            $table->unique(['variant_id', 'attribute_value_id']);
             $table->timestamps();
         });
     }
