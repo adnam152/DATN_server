@@ -14,13 +14,11 @@ return new class extends Migration
     {
         Schema::create('media', function (Blueprint $table) {
             $table->id();
-            $table->integer('related_id')->comment('Thuộc sản phẩm hoặc slider');
-            $table->enum('related_type', array_values(Media::RELATED_TYPE));
-            $table->string('url');
-            $table->enum('type', array_values(Media::TYPE));
+            $table->string('file_path');
+            $table->morphs('mediable');  // Tạo ra cột mediable_type và mediable_id
             $table->timestamps();
         });
-    }
+    }   
 
     /**
      * Reverse the migrations.

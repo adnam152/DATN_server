@@ -22,8 +22,8 @@ return new class extends Migration
             $table->enum('object_fit', array_values(Slider::OBJECT_FIT));
             $table->unsignedInteger('delay');
             $table->boolean('is_active')->default(false);
-            $table->foreignId('created_by')->constrained('admin_accounts');
-            $table->foreignId('updated_by')->constrained('admin_accounts');
+            $table->foreignId('created_by')->constrained('accounts');
+            $table->foreignId('updated_by')->constrained('accounts');
             $table->timestamps();
         });
     }

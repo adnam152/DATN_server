@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('customer_name');
-            $table->string('customer_email');
-            $table->string('customer_phone_number');
-            $table->string('customer_address');
+            $table->string('Account_name');
+            $table->string('Account_email');
+            $table->string('Account_phone_number');
+            $table->string('Account_address');
             $table->string('note')->nullable();
             $table->foreignId('payment_id')->constrained('payments');
             $table->string('status');
@@ -24,7 +24,7 @@ return new class extends Migration
             $table->integer('quantity');
             $table->integer('voucher_discount');
             $table->integer('total_price');
-            $table->foreignId('updated_by')->constrained('admin_accounts');
+            $table->foreignId('updated_by')->constrained('accounts');
             $table->timestamps();
         });
     }

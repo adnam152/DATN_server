@@ -9,6 +9,8 @@ class Media extends Model
 {
     use HasFactory;
 
-    const RELATED_TYPE = [ 'products', 'sliders'];
-    const TYPE = [ 'image', 'video' ];
+    public function mediable()
+    {
+        return $this->morphTo();
+    }
 }

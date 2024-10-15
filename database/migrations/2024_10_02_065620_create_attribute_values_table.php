@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('attribute_id')->constrained('attributes');
             $table->string('value');
-            $table->foreignId('created_by')->constrained('admin_accounts');
-            $table->foreignId('updated_by')->constrained('admin_accounts');
+            $table->foreignId('created_by')->constrained('accounts');
+            $table->foreignId('updated_by')->constrained('accounts');
             $table->timestamps();
         });
     }

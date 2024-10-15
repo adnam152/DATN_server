@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('variants_attribute_values', function (Blueprint $table) {
-            $table->foreignId('variant_id')->constrained('variants');
-            $table->foreignId('attribute_value_id')->constrained('attribute_values');
-            $table->primary(['attribute_value_id', 'variant_id']);            
-            $table->timestamps();
-        });
+            Schema::create('variants_attribute_values', function (Blueprint $table) {
+                $table->foreignId('variant_id')->constrained('variants');
+                $table->foreignId('attribute_value_id')->constrained('attribute_values');
+                $table->primary(['attribute_value_id', 'variant_id']);            
+                $table->timestamps();
+            });
     }
 
     /**

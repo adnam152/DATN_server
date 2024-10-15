@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('thumbnail');
             $table->text('content');
             $table->integer('view_count')->default(0);
-            $table->foreignId('created_by')->constrained('admin_accounts');
-            $table->foreignId('updated_by')->constrained('admin_accounts');
+            $table->foreignId('created_by')->constrained('accounts');
+            $table->foreignId('updated_by')->constrained('accounts');
             $table->timestamps();
         });
     }

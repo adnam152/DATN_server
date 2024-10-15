@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('catalogues', function (Blueprint $table) {
-            $table->id();
-            $table->string('catalogue')->unique();
-            $table->timestamps();
-        });
+            Schema::create('catalogues', function (Blueprint $table) {
+                $table->id();
+                $table->string('catalogue')->unique();
+                $table->string('slug')->unique();
+                $table->timestamps();
+            });
     }
 
     /**

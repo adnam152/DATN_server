@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Voucher;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,9 +14,18 @@ return new class extends Migration
     {
         Schema::create('vouchers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('customer_id')->constrained('customers');
-            $table->foreignId('voucher_id')->constrained('vouchers');
-            $table->foreignId('order_id')->constrained('orders');
+            $table->string('code')->unique();
+            $table->enum('discount_type',  Voucher::DISCOUNT_TYPE);
+            $table->double('discount_value');
+            $table->double('min_order_value');
+            $table->double('max_discount_value');
+            $table->integer('usage_limit');
+            $table->integer('usage_count');
+            $table->enum('status', Voucher::STATUS);
+            $table->dateTime('start_date');
+            $table->dateTime('end_date');
+            $table->foreignId('created_by')->constrained('accounts');
+            $table->foreignId('updated_by')->constrained('accounts');
             $table->timestamps();
         });
     }
