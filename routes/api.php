@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\Api\Accounts\AccountController;
+use App\Http\Controllers\Api\Auth\LoginController;
+use App\Http\Controllers\Api\Auth\RegisterController;
 use App\Http\Controllers\Api\Products\ProductController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,9 +16,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-Route::resource('/v1/products', ProductController::class);
 
-Route::resource('/v1/accounts', AccountController::class);
+
+Route::post('login', [LoginController::class, 'login']);
+Route::post('register', RegisterController::class);
+
+Route::group(['middleware' => 'api.auth'], function () {
+    Route::apiResource('v1/products', ProductController::class);
+});

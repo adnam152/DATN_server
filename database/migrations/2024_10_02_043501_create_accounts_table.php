@@ -13,7 +13,7 @@
         {
             Schema::create('accounts', function (Blueprint $table) {
                 $table->id();
-                $table->string('email')->unique();
+                $table->string('email')->nullable();
                 $table->string('phone_number')->unique();
                 $table->string('full_name');
                 $table->string('password');

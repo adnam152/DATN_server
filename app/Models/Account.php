@@ -2,12 +2,18 @@
 
 namespace App\Models;
 
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
-class Account extends Model
+class Account extends Authenticatable
 {
-    use HasFactory;
+    use HasFactory,
+     HasApiTokens, 
+     HasFactory, 
+     Notifiable;
+
 
     protected $fillable = [
         'email',
@@ -18,6 +24,11 @@ class Account extends Model
         'dob',
         'avatar',
         'role_id',
+    ];
+
+    protected $hidden = [
+        'password',
+        'remember_token',
     ];
     public function carts() {
         return $this->hasMany(Cart::class, 'account_id', 'id');

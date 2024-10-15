@@ -11,15 +11,20 @@ class AccountRequest extends FormRequest
      */
     public function rules(): array
     {
+        return [     
+            'phone_number' => 'required|string|max:20', 
+            'password' => 'required|string|min:6', 
+        ];
+    }
+    public function messages(): array
+    {
         return [
-            'email' => 'required|email|unique:accounts,email|max:255', 
-            'phone_number' => 'required|string|max:20|unique:accounts,phone_number', 
-            'full_name' => 'required|string|max:255', 
-            'password' => 'required|string|min:8', 
-            'address' => 'nullable|string|max:255', 
-            'dob' => 'nullable|date', 
-            'avatar' => 'nullable|url', 
-            'role_id' => 'required|exists:roles,id', 
+            'phone_number.required' => 'Số điện thoại không được để trống',
+            'phone_number.string' => 'Số điện thoại phải là kiểu chuổi',
+            'phone_number.max' => 'Số điện thoại không được vượt quá 20 kí tự',
+            'password.required' => 'Mật khẩu không được để trống',
+            'password.string' => 'Mật khẩu phải là kiểu chuổi',
+            'password.min' => 'Mật khẩu phải có ít nhất 6 kí tự',
         ];
     }
 }
