@@ -20,9 +20,8 @@ class ApiAuthenticate extends Controller
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ($user = auth('sanctum')->user()) {
-            auth()->login($user);
-
+        if ($account = auth('sanctum')->user()) {
+            auth()->login($account);
             return $next($request);
         }
 
