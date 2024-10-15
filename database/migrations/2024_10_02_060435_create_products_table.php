@@ -23,8 +23,8 @@ return new class extends Migration
             $table->integer('sale_count')->default(0);
             $table->integer('view_count')->default(0);
             $table->integer('wish_count')->default(0);
-            $table->foreignId('created_by')->constrained('admin_accounts');
-            $table->foreignId('updated_by')->constrained('admin_accounts');
+            $table->foreignId('created_by')->constrained('accounts');
+            $table->foreignId('updated_by')->constrained('accounts');
             $table->timestamps();
         });
     }

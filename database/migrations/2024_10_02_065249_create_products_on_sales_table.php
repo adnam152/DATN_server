@@ -15,9 +15,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('variant_id')->constrained('variants');
             $table->double('selling_price', 8, 2);
+            $table->double('discount_price', 8, 2);
             $table->unsignedBigInteger('stock');
-            $table->foreignId('created_by')->constrained('admin_accounts');
-            $table->foreignId('updated_by')->constrained('admin_accounts');
+            $table->foreignId('created_by')->constrained('accounts');
+            $table->foreignId('updated_by')->constrained('accounts');
             $table->timestamps();
         });
     }

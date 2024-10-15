@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('product_id')->constrained('products');
             $table->boolean('is_reviewed')->default(false);
-            $table->foreignId('customer_id')->constrained('customers');
+            $table->foreignId('account_id')->constrained('accounts');
             $table->enum('rating', array_values(Review::RATING));
             $table->text('comment');
             $table->timestamps();
