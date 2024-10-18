@@ -1,30 +1,27 @@
 <?php
-
 namespace App\Http\Middleware;
 
-use App\Constants\AuthConstants;
 use App\Http\Controllers\Controller;
-use App\Http\Traits\HttpResponses;
 use Closure;
+use Illuminate\Auth\Middleware\Authenticate as Middleware;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
-class ApiAuthenticate extends Controller
+class ApiAuthenticate extends Middleware
 {
-    use HttpResponses;
-
     /**
-     * @param Request $request
-     * @param Closure $next
-     * @return Response
+     * Get the path the user should be redirected to when they are not authenticated.
      */
-    public function handle(Request $request, Closure $next): Response
+    protected function redirectTo(Request $request): ?string
     {
-        if ($account = auth('sanctum')->user()) {
-            auth()->login($account);
-            return $next($request);
+        return $request->expectsJson() ? null : route('login');
+    }
+    public function handle($request, Closure $next, ...$guards)
+    {
+        if($jwt = $request->cookie('jwt_auth')) {
+            $request->headers->set('Authorization', "Bearer $jwt");
         }
-
-        return $this->error([], AuthConstants::UNAUTHORIZED);
+        $this->authenticate($request, ['api']);
+        return $next($request);
     }
 }

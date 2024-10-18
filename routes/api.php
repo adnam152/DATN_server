@@ -16,10 +16,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::prefix('auth')->group(function () {
+    Route::post('login', [LoginController::class, 'login']);
+    Route::post('logout', [LoginController::class, 'logout'])->middleware('api.auth');
+    Route::post('check', [LoginController::class, 'check'])->middleware('api.auth');
+    Route::post('register', RegisterController::class);
+});
 
-
-Route::post('login', [LoginController::class, 'login']);
-Route::post('register', RegisterController::class);
 
 Route::group(['middleware' => 'api.auth'], function () {
     Route::apiResource('v1/products', ProductController::class);

@@ -23,15 +23,16 @@ class RegisterController extends Controller
             $input['password'] = Hash::make($input['password']);
             $input['role_id'] = 2;
 
-            $account = Account::create($input);
+            $account = Account::create($input)->refresh();
+            $token = $account->createToken('authToken')->plainTextToken;
+            $cookie = cookie('jwt_auth', $token, 60 * 24, null, null, true, true, false, 'None');
 
-            $success['token'] = $account->createToken('authToken')->plainTextToken;
-            $success['full_name'] = $account->full_name;
-
-            return $this->success($success, AuthConstants::REGISTER);
+            return $this
+                ->success($account, AuthConstants::REGISTER, 201)
+                ->cookie($cookie);
         } catch (Exception $e) {
             Log::error('Registration failed: ' . $e->getMessage());
-            return $this->error($e->getMessage(), AuthConstants::UNREGISTER);
+            return $this->error(null, $e->getMessage());
         }
     }
 }

@@ -15,7 +15,7 @@ class RegisterRequest extends FormRequest
             'email' => 'nullable|email|unique:accounts,email|max:255', 
             'phone_number' => 'required|string|max:20|unique:accounts,phone_number', 
             'full_name' => 'required|string|max:255', 
-            'password' => 'required|string|min:6|confirmed', 
+            'password' => 'required|string|min:6', 
             'address' => 'nullable|string|max:255', 
             'dob' => 'nullable|date', 
             'avatar' => 'nullable|url', 
@@ -35,7 +35,6 @@ class RegisterRequest extends FormRequest
             'full_name.required' => 'Tên đầy đủ là bắt buộc.',
             'password.required' => 'Mật khẩu là bắt buộc.',
             'password.min' => 'Mật khẩu phải có ít nhất :min ký tự.',
-            'password.confirmed' => 'Mật khẩu xác nhận không khớp.',  
         ];
     }
 }
