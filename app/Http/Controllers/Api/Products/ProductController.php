@@ -23,7 +23,7 @@ class ProductController extends Controller
     public function index(Request $request)
     {
 
-        $query = $this->model->query()->with(['brand', 'catalogue', 'media', 'createdBy', 'updatedBy']);
+        $query = $this->model->query()->with(['brand', 'catalogue', 'media', 'createdBy', 'updatedBy', 'statuses']);
 
         // Kiểm tra nếu có filter theo brand slug
         if ($request->has('brand_slug')) {

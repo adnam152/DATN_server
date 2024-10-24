@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('variants', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id')->constrained('products');
-            $table->foreignId('status_id')->constrained('statues');
             $table->foreignId('created_by')->constrained('accounts');
             $table->foreignId('updated_by')->constrained('accounts');
             $table->timestamps();

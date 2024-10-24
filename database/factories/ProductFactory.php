@@ -18,6 +18,7 @@ class ProductFactory extends Factory
     {
         return [
             'name' => $this->faker->word,
+            'slug' => $this->faker->unique()->slug, // Tạo slug duy nhất
             'sku' => $this->faker->unique()->numerify('SKU-#####'), // Tạo mã SKU duy nhất
             'thumbnail' => $this->faker->imageUrl(), // URL hình ảnh ngẫu nhiên
             'description' => $this->faker->paragraph,
