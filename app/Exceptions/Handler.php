@@ -27,4 +27,40 @@ class Handler extends ExceptionHandler
             //
         });
     }
+
+    public function render($request, Throwable $exception)
+    {
+        if ($request->is('api/*')) {
+            if ($exception instanceof \Illuminate\Auth\AuthenticationException) {
+                return response()->json([
+                    'error' => 'Unauthorized',
+                    'message' => 'Bạn cần phải đăng nhập để truy cập tài nguyên này.'
+                ], 401);
+            }
+    
+            if ($exception instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException) {
+                return response()->json([
+                    'error' => 'Not Found',
+                    'message' => 'API endpoint không tồn tại.'
+                ], 404);
+            }
+    
+            if ($exception instanceof \Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException) {
+                return response()->json([
+                    'error' => 'Method Not Allowed',
+                    'message' => 'Phương thức này không được hỗ trợ cho yêu cầu của bạn.'
+                ], 405);
+            }
+    
+            if ($exception instanceof \Symfony\Component\HttpKernel\Exception\HttpException) {
+                return response()->json([
+                    'error' => 'Internal Server Error',
+                    'message' => 'Đã có lỗi xảy ra. Vui lòng thử lại sau.'
+                ], 500);
+            }
+            
+        }
+    
+        return parent::render($request, $exception);
+    }
 }

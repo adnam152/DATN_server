@@ -24,20 +24,17 @@ class Product extends Model
         'updated_by',
     ];
 
-
-    
-
     public function orderDetails() {
         return $this->hasMany(OrderDetail::class, 'product_id', 'id');
     }
 
     public function variants()
     {
-        return $this->hasMany(Variant::class, 'variant_id', 'id');
+        return $this->hasMany(Variant::class, 'product_id', 'id');
     }
     public function reviews()
     {
-        return $this->hasMany(Review::class, 'review_id', 'id');
+        return $this->hasMany(Review::class, 'product_id', 'id');
     }
     public function media()
     {
@@ -59,6 +56,9 @@ class Product extends Model
     {
         return $this->morphMany(Status::class, 'statusAble');
     }
-
+    
+    public function productTags() {
+        return $this->hasMany(ProductTag::class, 'product_id', 'id');
+    }
 
 }

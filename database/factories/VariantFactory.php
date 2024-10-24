@@ -18,7 +18,6 @@ class VariantFactory extends Factory
     {
         return [
             'product_id' => \App\Models\Product::inRandomOrder()->first()->id,
-            'status_id' => \App\Models\Status::inRandomOrder()->first()->id,
             'created_by' => \App\Models\Account::inRandomOrder()->first()->id,
             'updated_by' => \App\Models\Account::inRandomOrder()->first()->id,
         ];
